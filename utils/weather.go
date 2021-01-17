@@ -43,7 +43,7 @@ func (this *WeatherInfo) FillDate(selection *goquery.Selection) {
 	infoes := strings.Split(dateInfo, "　")
 	this.Date = infoes[0]
 	this.Week = infoes[1]
-	this.MoonCalendar = infoes[2]
+	this.MoonCalendar = strings.TrimSpace(infoes[2])
 }
 
 func (this *WeatherInfo) FillWeather(selection *goquery.Selection) {
@@ -55,7 +55,6 @@ func (this *WeatherInfo) FillWeather(selection *goquery.Selection) {
 	scopeString = strings.TrimLeft(scopeString, this.Weather)
 	scopeString = strings.TrimRight(scopeString, "℃")
 	scope := strings.Split(scopeString, " ~ ")
-	fmt.Println(scope)
 	lo, _ := strconv.Atoi(scope[0])
 	hi, _ := strconv.Atoi(scope[1])
 	this.TemperatureScope = TemperatureScope{
